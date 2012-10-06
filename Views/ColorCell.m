@@ -1,35 +1,21 @@
 //
 //  ColorCell.m
 //  CoreAnimationBindings
-//
-//  Created by Patrick Geiller on 23/04/08.
-//  Copyright 2008 __MyCompanyName__. All rights reserved.
-//
 
 #import "ColorCell.h"
 
-
 @implementation ColorCell
+@synthesize	observedKeyPath, color, observedObject;
 
-@synthesize	observedKeyPath;
-
-//
 // Draw a bezier roundrect filled with current color
-//
+
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	NSBezierPath* path = [NSBezierPath bezierPathWithRoundedRect:NSInsetRect(cellFrame, 4, 3) xRadius:4 yRadius:4];
-
-	[color setFill];
-	[path fill];
-	[[NSColor blackColor] setStroke];
-	[path stroke];
+	[path drawWithFill:color andStroke:BLACK];
 }
 
-//
-// setObjectValue
-//	save color for use in drawing
-//
+// setObjectValue -	save color for use in drawing
 - (void)setObjectValue:(id)object
 {
 	if (object != nil)	
@@ -37,11 +23,8 @@
 	[super setObjectValue:object];
 }
 
-//
-//	As cells seem to be recycled very aggressively, (used for painting and dismissed)
-//	use a shared instance to hold some data we're interested in : observed object and keypath.
-//	When clicking the cell, launch color panel and keep our observed data around to know what to update.
-//
+//	As cells seem to be recycled very aggressively, (used for painting and dismissed) use a shared instance to hold some data we're interested in : observed object and keypath. When clicking the cell, launch color panel and keep our observed data around to know what to update.
+
 + (id)sharedInstance
 {
 	static id singleton;

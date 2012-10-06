@@ -7,40 +7,28 @@
 //
 
 #import "ApplicationController.h"
-#import "SampleObject.h"
 #import "ColorCell.h"
-
 
 #define SampleObjectDataType @"com.parmanoir.SampleObject"
 
 @implementation ApplicationController
-@synthesize objects, arrayController, caListView, tableView;
+@synthesize mutObjects, arrayController, caListView, tableView;
 
 - (id)init
 {
 	if (![super init])	return nil;
 	
-	objects = [NSMutableArray array];
 
+	NSA *colors = [NSColor colorsInFrameworkListNamed:[(NSColorList*)[[NSColorList availableColorLists]randomElement]name]];
 	// Add some objects
-	SampleObject* object;
-	object = [[SampleObject alloc]init];
-	object.name = @"Core";
-	object.description = @"This is an example";
-	object.color = [NSColor colorWithDeviceRed:1.0 green:0.5 blue:0.5 alpha:1.0];
-	[objects addObject:object];
-
-	object = [[SampleObject alloc]init];
-	object.name = @"Animation";
-	object.description = @"of binding Cocoa objects";
-	object.color = [NSColor colorWithDeviceRed:0.0 green:1.0 blue:0.5 alpha:1.0];
-	[objects addObject:object];
-
-	object = [[SampleObject alloc]init];
-	object.name = @"Bindings";
-	object.description = @"to CALayers";
-	object.color = [NSColor colorWithDeviceRed:1.0 green:0.8 blue:0.5 alpha:1.0];
-	[objects addObject:object];
+	mutObjects = [[NSArray arrayFrom:0 To:8] arrayUsingBlock:^id(id obj) {
+		SampleObject* object;
+		object = [SampleObject new];
+		object.name = [NSString randomWords:1];
+		object.description = [NSString randomWords:3];
+		object.color = colors.randomElement;
+		return object;
+	}].mutableCopy;
 
 	return	self;
 }
@@ -73,7 +61,7 @@
     return YES;
 }
 
-- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id <NSDraggingInfo>)info proposedRow:(int)row proposedDropOperation:(NSTableViewDropOperation)op
+- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSI)row proposedDropOperation:(NSTableViewDropOperation)op
 {
 	// Accept only reordering, no drop on 
 	if (op == NSTableViewDropAbove)
@@ -82,7 +70,7 @@
     return NSDragOperationNone;
 }
 
-- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)operation
+- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info row:(NSI)row dropOperation:(NSTableViewDropOperation)operation
 {
     NSPasteboard* pboard = [info draggingPasteboard];
     NSData* rowData = [pboard dataForType:SampleObjectDataType];

@@ -1,37 +1,19 @@
 //
 //  SampleObject.m
 //  CoreAnimationListView
-//
 //  Created by Patrick Geiller on 07/04/08.
-//  Copyright 2008 __MyCompanyName__. All rights reserved.
-//
 
 #import "SampleObject.h"
 
-
 @implementation SampleObject
-
 @synthesize name, description, color;
-
-
-static double frandom(double start, double end)
-{
-  double r = random();
-  r /= RAND_MAX;
-  r = start + r*(end-start);
-  
-  return r;
-}
-
-
 
 - (id)init
 {
 	if (![super init])	return nil;
-	
-	name		= @"Sample";
-	description = @"description";
-	color		= [NSColor blueColor];
+	name		= [NSString randomWords:1];
+	description = [NSString randomWords:3];
+	color		= RANDOMCOLOR;
 	return	self;
 }
 

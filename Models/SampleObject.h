@@ -7,15 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <AtoZ/AtoZ.h>
 
 
-@interface SampleObject : NSObject {
-
-	NSString*	name;
-	NSString*	description;
-	NSColor*	color;
-	
-}
+@interface SampleObject : NSObject
 
 // Shared instance is the object modified after each key change
 + (SampleObject*)sharedInstance;

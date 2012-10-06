@@ -10,7 +10,7 @@
 
 
 @implementation CAListView
-@synthesize backgroundGradient, backgroundImage, layerHash, listLayer, observedObjects, recycledLayers, identifier;
+@synthesize backgroundGradient, backgroundImage, layerHash, listLayer, observedObjects, recycledLayers;
 
 - (void)awakeFromNib
 {
@@ -19,19 +19,18 @@
 	// Recycle bin for layers
 	recycledLayers			= [NSMutableArray array];
 	// Gradient
-	size_t num_locations	= 3;
-	CGFloat locations[3] 	= { 0.0, 0.7, 1.0 };
-	CGFloat components[12] 	= {	0.0, 0.0, 0.0, 1.0,  	0.7, 0.6, 1.0, 1.0,		1.0, 1.0, 1.0, 1.0 };
- 	CGColorSpaceRef space	= CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
-	backgroundGradient 		= CGGradientCreateWithColorComponents(space, components, locations, num_locations);
-
+//	size_t num_locations	= 3;
+//	CGFloat locations[3] 	= { 0.0, 0.7, 1.0 };
+//	CGFloat components[12] 	= {	0.0, 0.0, 0.0, 1.0,  	0.7, 0.6, 1.0, 1.0,		1.0, 1.0, 1.0, 1.0 };
+// 	CGColorSpaceRef space	= CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+//	backgroundGradient 		= CGGradientCreateWithColorComponents(space, components, locations, num_locations);
 	// Setup core animation and our list layer
 	self.wantsLayer			= YES;
 	CALayer* rootLayer 		= [self layer];
 	listLayer 				= [CALayer layer];
+	listLayer.arMASK		= CASIZEABLE;
 	rootLayer.sublayers		= @[listLayer];
-	listLayer.bounds 		= (CGRect) {0, 0, 300, 300};
-	listLayer.anchorPoint 	= (CGPoint) {0, 0};
+	[listLayer addConstraintsSuperSize];
 	listLayer.masksToBounds = YES;
 
 	// Load our background image
@@ -51,15 +50,28 @@
 //	drawRect
 //		draw our background gradient, Core Animation handles the rest
 //
+- (NSGradient*) backgroundGradient {
+	return backgroundGradient = backgroundGradient ? backgroundGradient : [NSGradient gradientFrom:RANDOMCOLOR to:RANDOMCOLOR];
+}
+
 - (void)drawRect:(NSRect)rect 
 {
-	float width = [self frame].size.width;
-	float height = [self frame].size.height;
-	CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort]; 	
-	CGContextDrawRadialGradient(ctx, backgroundGradient, 
-								CGPointMake(width/2, height), width*2, 
-								CGPointMake(width/2, -height/2), 0,
+
+//	[NSGraphicsContext saveGraphicsState];
+	NSLog(@" graphics context before block : %@", [NSGraphicsContext currentContext].propertiesPlease);
+	[[NSGraphicsContext currentContext]   state:^{
+			NSLog(@" graphics context inside block : %@", [[NSGraphicsContext currentContext]]);
+		[self.backgroundGradient drawInRect:rect angle:270];
+	}];
+//	[NSGraphicsContext restoreGraphicsState];
+	/*	CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
+	[NSGraphicsContext drawInContext:ctx flipped:NO actions:^{
+		CGContextDrawRadialGradient(ctx, backgroundGradient,
+								CGPointMake(self.width/2, self.height), self.width*2,
+								CGPointMake(self.width/2, -self.height/2), 0,
 								kCGGradientDrawsAfterEndLocation);
+	}];
+*/
 }
 
 //	the meat of the class. position objects, recycle layers of deleted objects, 
@@ -67,63 +79,35 @@
 
 - (void)repositionObjects
 {
-	int i;
-	int numObjects = [observedObjects count];
-//	// Delete layers whose bound object has been deleted
-//	NSArray* keys = [layerHash allKeys];
-//	for (NSNumber* ptr in keys)
-//	{
-//		NSUInteger idx = [observedObjects inde indexOfObject:()[ptr unsignedIntegerValue]];
-//		// Needs recycling
-//		if (idx == NSNotFound)
-//			[self recycleLayerForObject:(id)[ptr intValue]];
-//	}
-
-
+	NSUI i;
+	NSUI numObjects = [observedObjects count];
+	NSLog(@"number of observed: %ld", numObjects);
 	if (numObjects == 0)	return;
-
-	float viewWidth = [self frame].size.width;
-	float viewHeight = [self frame].size.height;
-
-	CALayer* layer = [self layerForObject:[observedObjects objectAtIndex:0]];
-	float layerHeight = layer.bounds.size.height;
-
-	float usedHeight = numObjects * layerHeight;
-	float s = viewHeight / usedHeight;
-	
-	float containerWidth = viewWidth;
-	float containerHeight = viewHeight;
-	float startHeight = viewHeight;
-	if (usedHeight > viewHeight)	
-	{
-		startHeight = viewHeight/s;
-		containerHeight = usedHeight/s;
-		containerWidth = viewWidth/s;
-	}
-	
+	AZSizer *u = [AZSizer forQuantity: numObjects inRect:[self bounds]];
 	for (i=0; i<numObjects; i++)
 	{
 		CALayer* layer = [self layerForObject:[observedObjects objectAtIndex:i]];
-		float y = startHeight-layerHeight*(i+1);
-		layer.position = CGPointMake(50, y);
+		layer.frame = [[u.rects normal:i]rectValue];
 	}
-	
-	listLayer.bounds = CGRectMake(0, 0, containerWidth, containerHeight);
-	
-	if (usedHeight > viewHeight)
-		listLayer.transform = CATransform3DMakeScale(s, s, s);
-	else
-		listLayer.transform = CATransform3DIdentity;
+	NSLog(@"%d objects, %d layers", numObjects, [listLayer.sublayers count]);
 
-//	NSLog(@"%d objects, %d layers", numObjects, [listLayer.sublayers count]);
+	// Delete layers whose bound object has been deleted
+//	NSArray* keys = [layerHash allKeys];
+//	for (NSString* ptr in keys)
+//	{
+//		layer = [layerHash objectForKey:[NSNumber numberWithInt:(int)object]];
+//		NSLog(@"layerhash ptr: %@", [layerHash valueForKey:ptr]);
+//		NSUInteger idx = [observedObjects indexOfObject:];
+//		// Needs recycling
+//		if (idx == NSNotFound)
+//			[self recycleLayerForObject:(id)[layerHash objectForKey:ptr]];
+//	}
+//	listLayer.bounds = CGRectMake(0, 0, containerWidth, containerHeight);
+//	if (usedHeight > self.height)	listLayer.transform = CATransform3DMakeScale(s, s, s);
+//	else	listLayer.transform = CATransform3DIdentity;
 }
 
-
-//
-// Given an object, return its matching layer
-//	if no layer is found, check the recycle bin.
-//	if recycle bin is empty, create a new layer
-//
+// Given an object, return its matching layer.  if no layer is found, check the recycle bin.  if recycle bin is empty, create a new layer
 - (CALayer*)layerForObject:(id)object
 {
 	CALayer* layer = nil;
@@ -154,33 +138,41 @@
 {
 	// master container layer
 	CALayer* layer = [CALayer layer];
-	layer.anchorPoint = CGPointMake(0, 0);
+//	layer.anchorPoint = CGPointMake(0, 0);
 
 	// container layer, having padding, gradient image and containing text layers
 	CALayer* innerLayer = [CALayer layer];
-	innerLayer.anchorPoint = CGPointMake(0, 0);
+//	innerLayer.anchorPoint = CGPointMake(0, 0);
 	innerLayer.shadowOpacity = 0.5;
-	innerLayer.contents = (id)backgroundImage;
+//	innerLayer.contents = [NSImage systemIcons].randomElement;//(id)backgroundImage;
 
 	CATextLayer* textLayer1 = [CATextLayer layer];
 	textLayer1.fontSize = 25;
-	textLayer1.style	= [NSDictionary dictionaryWithObjectsAndKeys:@"Futura-MediumItalic", @"font", nil];
-	textLayer1.anchorPoint = CGPointMake(0, 0);
-	textLayer1.shadowOpacity= 0.7;
-	textLayer1.shadowRadius = 2.0;
-	textLayer1.shadowOffset = CGSizeMake(0, -2);
+	textLayer1.style	= @{@"font":@"Ubuntu Mono Bold"};
+	AddShadow(textLayer1);
+//	textLayer1.anchorPoint = CGPointMake(0, 0);
+//	textLayer1.shadowOpacity= 0.7;
+//	textLayer1.shadowRadius = 2.0;
+//	textLayer1.shadowOffset = CGSizeMake(0, -2);
 
 	CATextLayer* textLayer2 = [CATextLayer layer];
 	textLayer2.fontSize = 15;
-	textLayer2.style	= [NSDictionary dictionaryWithObjectsAndKeys:@"Futura-MediumItalic", @"font", nil];
-	textLayer2.opacity	= 0.7;
-	textLayer2.anchorPoint = CGPointMake(0, 0);
-	
+	textLayer2.style	= @{@"font":@"Ubuntu Mono Bold"};
+//	textLayer2.opacity	= 0.7;
+//	textLayer2.anchorPoint = CGPointMake(0, 0);
+
+
 	[listLayer addSublayer:layer];
 	[layer addSublayer:innerLayer];
-	[innerLayer addSublayer:textLayer1];
-	[innerLayer addSublayer:textLayer2];
-
+	innerLayer.sublayers = @[textLayer1, textLayer2];
+	[@[innerLayer, textLayer1, textLayer2] eachWithIndex:^(CALayer* obj, NSInteger idx) {
+		obj.layoutManager 	= [CAConstraintLayoutManager layoutManager];
+		obj.arMASK 			= CASIZEABLE;
+		[obj addConstraintsSuperSize];
+	}];
+	[@[textLayer1, textLayer2]eachWithIndex:^(CATextLayer* obj, NSInteger idx) {
+		[obj addConstraint:AZConstRelSuperScaleOff(kCAConstraintMaxY, .1*(idx+1),0)];
+	}];
 	return	layer;
 }
 
