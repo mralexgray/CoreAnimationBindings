@@ -1,0 +1,142 @@
+// !$*UTF8*$!
+{
+	089C165DFE840E0CC02AAC07 /* English */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1050, 869}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 100}";
+			sepNavWindowFrame = "{{38, 170}, {1109, 982}}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeArchitecture = i386;
+		activeBuildConfigurationName = Release;
+		activeExecutable = 3DE9FD310DBF0CE60091A65F /* CoreAnimationBindings */;
+		activeTarget = 8D1107260486CEB800E47090 /* CoreAnimationBindings */;
+		addToTargets = (
+			8D1107260486CEB800E47090 /* CoreAnimationBindings */,
+		);
+		breakpoints = (
+		);
+		codeSenseManager = 3DE9FD430DBF0CF50091A65F /* Code sense */;
+		executables = (
+			3DE9FD310DBF0CE60091A65F /* CoreAnimationBindings */,
+		);
+		perUserDictionary = {
+			PBXPerProjectTemplateStateSaveDate = 230762121;
+			PBXWorkspaceStateSaveDate = 230762121;
+		};
+		sourceControlManager = 3DE9FD420DBF0CF50091A65F /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	3D8175A70DBF210E00B68295 /* ApplicationController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1050, 869}}";
+			sepNavSelRange = "{435, 0}";
+			sepNavVisRange = "{0, 443}";
+			sepNavWindowFrame = "{{154, 53}, {1109, 982}}";
+		};
+	};
+	3D8175A80DBF210E00B68295 /* ApplicationController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1050, 1155}}";
+			sepNavSelRange = "{1833, 0}";
+			sepNavVisRange = "{435, 2856}";
+			sepNavWindowFrame = "{{390, 45}, {1109, 982}}";
+		};
+	};
+	3D8175A90DBF210E00B68295 /* SampleObject.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1050, 869}}";
+			sepNavSelRange = "{745, 0}";
+			sepNavVisRange = "{0, 751}";
+			sepNavWindowFrame = "{{452, 62}, {1109, 982}}";
+		};
+	};
+	3D8175AA0DBF210E00B68295 /* SampleObject.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1050, 1375}}";
+			sepNavSelRange = "{523, 0}";
+			sepNavVisRange = "{0, 2044}";
+			sepNavWindowFrame = "{{415, 57}, {1109, 982}}";
+		};
+	};
+	3D8175AD0DBF211A00B68295 /* CAListView.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1050, 869}}";
+			sepNavSelRange = "{699, 0}";
+			sepNavVisRange = "{0, 707}";
+			sepNavWindowFrame = "{{173, 49}, {1109, 982}}";
+		};
+	};
+	3D8175AE0DBF211A00B68295 /* CAListView.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {439, 3465}}";
+			sepNavSelRange = "{2676, 0}";
+			sepNavVisRange = "{2327, 299}";
+			sepNavWindowFrame = "{{426, 65}, {1117, 988}}";
+		};
+	};
+	3D81766C0DBF313200B68295 /* ColorCell.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1050, 869}}";
+			sepNavSelRange = "{195, 0}";
+			sepNavVisRange = "{0, 439}";
+			sepNavWindowFrame = "{{442, 28}, {1109, 982}}";
+		};
+	};
+	3D81766D0DBF313200B68295 /* ColorCell.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1050, 1199}}";
+			sepNavSelRange = "{1937, 0}";
+			sepNavVisRange = "{0, 1879}";
+			sepNavWindowFrame = "{{430, 84}, {1109, 982}}";
+		};
+	};
+	3DE9FD310DBF0CE60091A65F /* CoreAnimationBindings */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = CoreAnimationBindings;
+		savedGlobals = {
+		};
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	3DE9FD420DBF0CF50091A65F /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+	};
+	3DE9FD430DBF0CF50091A65F /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	8D1107260486CEB800E47090 /* CoreAnimationBindings */ = {
+		activeExec = 0;
+		executables = (
+			3DE9FD310DBF0CE60091A65F /* CoreAnimationBindings */,
+		);
+	};
+}
