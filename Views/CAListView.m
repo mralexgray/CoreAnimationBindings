@@ -10,49 +10,41 @@
 
 
 @implementation CAListView
-
+@synthesize backgroundGradient, backgroundImage, layerHash, listLayer, observedObjects, recycledLayers, identifier;
 
 - (void)awakeFromNib
 {
-	// Our layer hash : this is how we match objects and layers.
-	// Holds a CALayer as value by using an object's pointer as its key.
-	layerHash = [[NSMutableDictionary alloc] init];
-
+	// Our layer hash : this is how we match objects and layers.  Holds a CALayer as value by using an object's pointer as its key.
+	layerHash 				= [NSMutableDictionary dictionary];
 	// Recycle bin for layers
-	recycledLayers	= [[NSMutableArray alloc] init];
-
-
+	recycledLayers			= [NSMutableArray array];
 	// Gradient
-	size_t num_locations = 3;
-	CGFloat locations[3] = { 0.0, 0.7, 1.0 };
-	CGFloat components[12] = {	0.0, 0.0, 0.0, 1.0,
-								0.7, 0.6, 1.0, 1.0,
-								1.0, 1.0, 1.0, 1.0 };
- 	CGColorSpaceRef colorspace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
-	backgroundGradient = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
-
+	size_t num_locations	= 3;
+	CGFloat locations[3] 	= { 0.0, 0.7, 1.0 };
+	CGFloat components[12] 	= {	0.0, 0.0, 0.0, 1.0,  	0.7, 0.6, 1.0, 1.0,		1.0, 1.0, 1.0, 1.0 };
+ 	CGColorSpaceRef space	= CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+	backgroundGradient 		= CGGradientCreateWithColorComponents(space, components, locations, num_locations);
 
 	// Setup core animation and our list layer
-	[self setWantsLayer:true];
-	CALayer* rootLayer = [self layer];
-
-	listLayer = [CALayer layer];
-	[rootLayer addSublayer:listLayer];
-	listLayer.bounds = CGRectMake(0, 0, 300, 300);
-	listLayer.anchorPoint = CGPointMake(0, 0);
+	self.wantsLayer			= YES;
+	CALayer* rootLayer 		= [self layer];
+	listLayer 				= [CALayer layer];
+	rootLayer.sublayers		= @[listLayer];
+	listLayer.bounds 		= (CGRect) {0, 0, 300, 300};
+	listLayer.anchorPoint 	= (CGPoint) {0, 0};
 	listLayer.masksToBounds = YES;
 
 	// Load our background image
-	// http://developer.apple.com/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_images/chapter_12_section_4.html
 	NSString* path = [[NSBundle mainBundle] pathForImageResource:@"gradient2.png"];
-	CGDataProviderRef provider = CGDataProviderCreateWithURL( (CFURLRef)([NSURL fileURLWithPath:path]) );
-	backgroundImage = CGImageCreateWithPNGDataProvider(provider, nil, true, kCGRenderingIntentDefault);
-    CGDataProviderRelease (provider);
+	backgroundImage = [[NSImage alloc]initWithContentsOfFile:path];
 
-	
 	// Re set our objects : we get them before waking up.
 	[self setObjects:observedObjects];
 }
+// 	http://developer.apple.com/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_images/chapter_12_section_4.html
+//	CGDataProviderRef provider = CGDataProviderCreateWithURL( (CFURLRef)([NSURL fileURLWithPath:path]) );
+//	CGImageCreateWithPNGDataProvider(provider, nil, true, kCGRenderingIntentDefault);
+//  CGDataProviderRelease (provider);
 
 
 //
@@ -70,29 +62,23 @@
 								kCGGradientDrawsAfterEndLocation);
 }
 
-
-//
-// reposition objects
 //	the meat of the class. position objects, recycle layers of deleted objects, 
 //	scale back container layer to view all objects when they're about to overflow the view
-//
+
 - (void)repositionObjects
 {
 	int i;
 	int numObjects = [observedObjects count];
-	
-	
-	
-	// Delete layers whose bound object has been deleted
-	NSArray* keys = [layerHash allKeys];
-	for (NSNumber* ptr in keys)
-	{
-		int idx = [observedObjects indexOfObject:(id)[ptr intValue]];
-		// Needs recycling
-		if (idx == NSNotFound)
-			[self recycleLayerForObject:(id)[ptr intValue]];
-	}
-	
+//	// Delete layers whose bound object has been deleted
+//	NSArray* keys = [layerHash allKeys];
+//	for (NSNumber* ptr in keys)
+//	{
+//		NSUInteger idx = [observedObjects inde indexOfObject:()[ptr unsignedIntegerValue]];
+//		// Needs recycling
+//		if (idx == NSNotFound)
+//			[self recycleLayerForObject:(id)[ptr intValue]];
+//	}
+
 
 	if (numObjects == 0)	return;
 
@@ -144,16 +130,13 @@
 	layer = [layerHash objectForKey:[NSNumber numberWithInt:(int)object]];
 	if (layer == nil)
 	{
-		// Get a layer out of the recycle bin if possible
-		if ([recycledLayers count])
+		if ([recycledLayers count]) 		// Get a layer out of the recycle bin if possible
 		{
 			layer = [recycledLayers objectAtIndex:0];
 			[recycledLayers removeObjectAtIndex:0];
 		}
-		else
-		// Create a new one
-			layer = [self newLayer];
-		
+		else layer = [self newLayer]; 		// Create a new one
+
 		[self updateLayer:layer withObject:object];
 		[layerHash setObject:layer forKey:[NSNumber numberWithInt:(int)object]];
 		layer.transform = CATransform3DIdentity;
@@ -162,7 +145,6 @@
 	return	layer;
 }
 
-//
 // new layer
 //	one container layer
 //	inside, another container layer, with gradient image and padding
@@ -218,10 +200,8 @@
 	[recycledLayers addObject:layer];
 }
 
-//
 // update layer
 //	when objects change, reflect their new data in their corresponding layers
-//
 - (void)updateLayer:(CALayer*)layer withObject:(SampleObject*)object
 {
 	CALayer* innerLayer		= [layer.sublayers objectAtIndex:0];
@@ -256,35 +236,21 @@
 	layer.bounds = CGRectMake(0, 0, w+hpadding*2, s1.height + s2.height+vpadding*2);
 }
 
-
-//
 // Reposition objects on resize
-//
-- (void)viewDidEndLiveResize
-{
-	[self repositionObjects];
-}
+- (void)viewDidEndLiveResize	{	[self repositionObjects];	}
 
-
-//
 // Observation
 //	observe array change (insertion, removal), reposition objects on change
-//
 - (void)setObjects:(id)objects
 {
 	observedObjects = objects;
 	[self repositionObjects];
 }
 
-- (id)objects
-{
-	return	nil;
-}
+- (id)objects { 	return	nil; 	}
 
-//
 // Observation
 //	observe changes to object keys, update layer on change
-//
 - (void)setObjectsKeyChanged:(id)i
 {
 	SampleObject* object = [SampleObject lastModifiedInstance];

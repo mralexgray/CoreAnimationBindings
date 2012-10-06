@@ -9,16 +9,15 @@
 #import <Cocoa/Cocoa.h>
 #import "SampleObject.h"
 #import "CAListView.h"
+#import <AtoZ/AtoZ.h>
 
 
-@interface ApplicationController : NSObject {
+@interface ApplicationController : NSObject <NSTableViewDataSource>
 
-	NSMutableArray*		objects;
-	
-	IBOutlet	CAListView*			caListView;
-	IBOutlet	NSArrayController*	arrayController;
-	IBOutlet	NSTableView*		tableView;
+@property (nonatomic, retain) NSMA *objects;
 
-}
+@property (assign) IBOutlet CAListView			*caListView;
+@property (assign) IBOutlet NSArrayController 	*arrayController;
+@property (assign) IBOutlet NSTableView		*tableView;
 
 @end

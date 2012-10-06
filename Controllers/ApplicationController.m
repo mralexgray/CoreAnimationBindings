@@ -13,10 +13,8 @@
 
 #define SampleObjectDataType @"com.parmanoir.SampleObject"
 
-
-
-
 @implementation ApplicationController
+@synthesize objects, arrayController, caListView, tableView;
 
 - (id)init
 {

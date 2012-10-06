@@ -9,20 +9,16 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 #import "SampleObject.h"
+#import <AtoZ/AtoZ.h>
 
-@interface CAListView : NSView {
+@interface CAListView : NSView
 
-	NSMutableDictionary*	layerHash;
-	NSMutableArray*			recycledLayers;
-	
-	CGGradientRef backgroundGradient;
-	
-	CGImageRef backgroundImage;
-	CALayer*				listLayer;
-
-	NSArray*	observedObjects;
-
-}
+@property (nonatomic, strong) NSMD	*layerHash;
+@property (nonatomic, strong) NSMA	*recycledLayers;
+@property (nonatomic, assign) CGGradientRef backgroundGradient;
+@property (nonatomic, strong) NSIMG	*backgroundImage;
+@property (nonatomic, strong) CAL	*listLayer;
+@property (nonatomic, strong) NSA	*observedObjects;
 
 
 - (void)repositionObjects;
