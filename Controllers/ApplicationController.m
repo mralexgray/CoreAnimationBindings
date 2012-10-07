@@ -17,18 +17,23 @@
 - (id)init
 {
 	if (![super init])	return nil;
-	
+	[self.reload setTarget:caListView];
+	[self.reload setAction:@selector(repositionObjects)];
 
-	NSA *colors = [NSColor colorsInFrameworkListNamed:[(NSColorList*)[[NSColorList availableColorLists]randomElement]name]];
+	NSColorList *colors = [[NSColorList availableColorLists]randomElement];
 	// Add some objects
+
 	mutObjects = [[NSArray arrayFrom:0 To:8] arrayUsingBlock:^id(id obj) {
 		SampleObject* object;
 		object = [SampleObject new];
-		object.name = [NSString randomWords:1];
-		object.description = [NSString randomWords:3];
-		object.color = colors.randomElement;
-		return object;
+		NSS *x = [[colors allKeys] randomElement];
+		object.name = x;
+		object.description = [[colors colorWithKey:x]nameOfColor];
+		object.color = [colors colorWithKey:x];
+//		return object.copy;
 	}].mutableCopy;
+	//	[mutObjects setAssociatedValue:colors forKey:@"colorlist"];
+
 
 	return	self;
 }
@@ -40,7 +45,7 @@
 	[caListView bind:@"objects" toObject:arrayController withKeyPath:@"arrangedObjects" options:nil];
 	// and to each key of each instance of SampleObject
 	[caListView bind:@"objectsKeyChanged" toObject:[SampleObject sharedInstance] withKeyPath:@"keyChanged" options:nil];
-
+//	[[SampleObject sharedInstance] addObserver:caListView forKeyPath:@"keyChanged" options:0 context:nil];
 
 	// Setup drag and drop our tableview
 	[tableView registerForDraggedTypes:[NSArray arrayWithObject:SampleObjectDataType] ];

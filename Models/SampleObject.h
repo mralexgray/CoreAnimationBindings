@@ -19,6 +19,7 @@
 + (NSString*)lastModifiedKey;
 + (void)setLastModifiedKey:(NSString*)key forInstance:(id)object;
 
+@property (copy)	NSString*	uniqueID;
 
 @property (copy)	NSString*	name;
 @property (copy)	NSString*	description;

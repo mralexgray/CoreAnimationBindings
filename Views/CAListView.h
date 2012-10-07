@@ -13,21 +13,15 @@
 
 @interface CAListView : NSView
 
-@property (nonatomic, strong) NSMD	*layerHash;
-@property (nonatomic, strong) NSMA	*recycledLayers;
-@property (nonatomic, strong) NSGradient *backgroundGradient;
-@property (nonatomic, strong) NSIMG	*backgroundImage;
-@property (nonatomic, strong) CAL	*listLayer;
-@property (nonatomic, strong) NSA	*observedObjects;
 
+@property (nonatomic, assign) NSUI numberOfLayers, numberOfObjects;
+@property (assign) IBOutlet NSViewController *vC;
+@property (nonatomic, retain) NSS *selectedIndex;
+@property (nonatomic, retain) NSMA *objects;
 
 - (void)repositionObjects;
-- (CALayer*)layerForObject:(id)object;
-- (CALayer*)newLayer;
-- (void)recycleLayerForObject:(id)object;
+
 - (void)updateLayer:(CALayer*)layer withObject:(id)object;
-
-- (void)setObjects:(id)objects;
-
+- (CALayer*)layerForObject:(id)object;
 
 @end
