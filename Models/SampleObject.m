@@ -10,12 +10,10 @@
 
 - (id)init
 {
-//	if (![super init])	return nil;
-	self = self ?self : [super init];
+	if (![super init])	return nil;
 	name		= [NSString randomWords:1];
 	description = [NSString randomWords:3];
 	color		= RANDOMCOLOR;
-	_uniqueID = [NSString newUniqueIdentifier];
 	return	self;
 }
 

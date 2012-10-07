@@ -10,11 +10,10 @@
 
 @interface ApplicationController : NSObject <NSTableViewDataSource>
 
-@property (nonatomic, strong) NSMA *mutObjects;
+@property (nonatomic, retain) NSMA *mutObjects;
 
-@property (strong) IBOutlet CAListView			*caListView;
-@property (strong) IBOutlet NSArrayController 	*arrayController;
+@property (assign) IBOutlet CAListView			*caListView;
+@property (assign) IBOutlet NSArrayController 	*arrayController;
 @property (assign) IBOutlet NSTableView			*tableView;
-@property (assign) IBOutlet NSButton			*reload;
 
 @end
