@@ -10,19 +10,11 @@
 #import <AtoZ/AtoZ.h>
 
 
-@interface SampleObject : NSObject
-
 // Shared instance is the object modified after each key change
-+ (SampleObject*)sharedInstance;
+//+ (SampleObject*)sharedInstance;
 // After being notified of change to the shared instance, call this to get last modified key of last modified instance
-+ (SampleObject*)lastModifiedInstance;
-+ (NSString*)lastModifiedKey;
-+ (void)setLastModifiedKey:(NSString*)key forInstance:(id)object;
+//+ (SampleObject*)lastModifiedInstance;
+//+ (NSString*)lastModifiedKey;
+//+ (void)setLastModifiedKey:(NSString*)key forInstance:(id)object;
 
 
-@property (copy)	NSString*	name;
-@property (copy)	NSString*	description;
-@property (copy)	NSColor*	color;
-
-
-@end

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3D23421A0DC084890041E727 /* gradient2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2342190DC084890041E727 /* gradient2.png */; };
 		3D8175AB0DBF210E00B68295 /* ApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8175A80DBF210E00B68295 /* ApplicationController.m */; };
-		3D8175AC0DBF210E00B68295 /* SampleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8175AA0DBF210E00B68295 /* SampleObject.m */; };
 		3D8175AF0DBF211A00B68295 /* CAListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8175AE0DBF211A00B68295 /* CAListView.m */; };
 		3D81766E0DBF313200B68295 /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D81766D0DBF313200B68295 /* ColorCell.m */; };
 		3D817D1A0DBFA1AC00B68295 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D817D190DBFA1AC00B68295 /* QuartzCore.framework */; };
@@ -63,6 +62,7 @@
 			children = (
 				3D8175AD0DBF211A00B68295 /* CAListView.h */,
 				3D8175AE0DBF211A00B68295 /* CAListView.m */,
+				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
 				3D81766C0DBF313200B68295 /* ColorCell.h */,
 				3D81766D0DBF313200B68295 /* ColorCell.m */,
 			);
@@ -117,7 +117,6 @@
 				3D2342190DC084890041E727 /* gradient2.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
-				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
 			);
 			path = Resources;
 			sourceTree = SOURCE_ROOT;
@@ -214,7 +213,6 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				3D8175AB0DBF210E00B68295 /* ApplicationController.m in Sources */,
-				3D8175AC0DBF210E00B68295 /* SampleObject.m in Sources */,
 				3D8175AF0DBF211A00B68295 /* CAListView.m in Sources */,
 				3D81766E0DBF313200B68295 /* ColorCell.m in Sources */,
 			);
@@ -237,6 +235,7 @@
 				29B97319FDCFA39411CA2CEA /* English */,
 			);
 			name = MainMenu.nib;
+			path = ../Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

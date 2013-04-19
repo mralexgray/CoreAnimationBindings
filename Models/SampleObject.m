@@ -41,6 +41,7 @@
 // setValue:forKey:
 //	overload to dispatch change notification to our shared instance
 //
+/*
 - (void)setValue:(id)value forKey:(NSString*)key
 {
 	[super setValue:value forKey:key];
@@ -100,6 +101,6 @@ static NSString* lastModifiedKey;
 - (void)setKeyChanged:(SampleObject*)sampleObject
 {
 }
-
+*/
 
 @end

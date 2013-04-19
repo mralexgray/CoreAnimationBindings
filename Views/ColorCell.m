@@ -4,6 +4,24 @@
 
 #import "ColorCell.h"
 
+
+@implementation SampleObject
+
++ (instancetype) instanceWithName:(NSS*)name andColor:(NSC*)c	{
+
+	SampleObject *n = self.instance;
+	n.name = name.copy;
+	n.color = c ?: RANDOMCOLOR.deviceRGBColor;
+	return n;
+}
+- (void) setName: 	 (NSS*)name 		{
+
+	if  (name) _name = name.copy;
+	if (_name)	[AZOS addOperation:[NSBLO blockOperationWithBlock:^{	self.description = _name.wikiDescription ?: @"description N/A"; }]];
+}
+- (void) setColor:(NSColor *)color { [self willChangeValueForKey:@"color"];_color = color;  [self didChangeValueForKey:@"color"]; }
+@end
+
 @implementation ColorCell
 @synthesize	observedKeyPath, color, observedObject;
 
