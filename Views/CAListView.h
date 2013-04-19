@@ -15,8 +15,6 @@
 
 @property (nonatomic, strong) NSMD	*layerHash;
 @property (nonatomic, strong) NSMA	*recycledLayers;
-@property (nonatomic, strong) NSGradient *backgroundGradient;
-@property (nonatomic, strong) NSIMG	*backgroundImage;
 @property (nonatomic, strong) CAL	*listLayer;
 @property (nonatomic, strong) NSA	*observedObjects;
 

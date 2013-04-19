@@ -12,39 +12,34 @@
 #define SampleObjectDataType @"com.parmanoir.SampleObject"
 
 @implementation ApplicationController
-@synthesize mutObjects, arrayController, caListView, tableView;
+
 
 - (id)init
 {
 	if (![super init])	return nil;
-	
 
-	NSA *colors = [NSColor colorsInFrameworkListNamed:[(NSColorList*)[[NSColorList availableColorLists]randomElement]name]];
 	// Add some objects
-	mutObjects = [[NSArray arrayFrom:0 To:8] arrayUsingBlock:^id(id obj) {
+	_mutObjects = [NSC.randomPalette map:^id(id obj) {
 		SampleObject* object;
 		object = [SampleObject new];
-		object.name = [NSString randomWords:1];
+		object.name 	= [NSString randomBadWord];
 		object.description = [NSString randomWords:3];
-		object.color = colors.randomElement;
+		object.color = obj;
 		return object;
 	}].mutableCopy;
-
 	return	self;
 }
 
-- (void)awakeFromNib
-{
+- (void) awakeFromNib	{
 
 	// Observe changes to the controller's objects array, 
-	[caListView bind:@"objects" toObject:arrayController withKeyPath:@"arrangedObjects" options:nil];
+	[_caListView bind:@"objects" toObject:_arrayController withKeyPath:@"arrangedObjects" options:nil];
 	// and to each key of each instance of SampleObject
-	[caListView bind:@"objectsKeyChanged" toObject:[SampleObject sharedInstance] withKeyPath:@"keyChanged" options:nil];
-
-
+	[_caListView bind:@"objectsKeyChanged" toObject:[SampleObject sharedInstance]
+			withKeyPath:@"keyChanged" 			 options:nil];
 	// Setup drag and drop our tableview
-	[tableView registerForDraggedTypes:[NSArray arrayWithObject:SampleObjectDataType] ];
-	[tableView setDataSource:self];
+	[_tableView registerForDraggedTypes:@[SampleObjectDataType]];
+	[_tableView setDataSource:self];
 }
 
 
@@ -78,11 +73,10 @@
     int dragRow = [rowIndexes firstIndex];
 
 	// Reordering is insertion at new position and removal at old position. No atomic method in arrays.
-	id object = [[arrayController arrangedObjects] objectAtIndex:dragRow];
-	[arrayController insertObject:object atArrangedObjectIndex:row];
+	[_arrayController insertObject:_arrayController.arrangedObjects[dragRow] atArrangedObjectIndex:row];
 	
 	if (dragRow >= row) dragRow++;
-	[arrayController removeObjectAtArrangedObjectIndex:dragRow];
+	[_arrayController removeObjectAtArrangedObjectIndex:dragRow];
 	return	YES;
 }
 

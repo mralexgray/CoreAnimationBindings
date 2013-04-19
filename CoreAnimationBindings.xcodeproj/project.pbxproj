@@ -93,17 +93,16 @@
 				8D1107320486CEB800E47090 /* CoreAnimationBindings.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* CoreAnimationBindings */ = {
 			isa = PBXGroup;
 			children = (
 				7B662AF9162098D0003D5EE0 /* Controllers */,
-				29B97323FDCFA39411CA2CEA /* Frameworks */,
-				7B662AFA162098E3003D5EE0 /* Models */,
-				19C28FACFE9D520D11CA2CBB /* Products */,
-				29B97317FDCFA39411CA2CEA /* Resources */,
 				080E96DDFE201D6D7F000001 /* Views */,
+				7B662AFA162098E3003D5EE0 /* Models */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
 			);
 			name = CoreAnimationBindings;
 			sourceTree = "<group>";
@@ -111,6 +110,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
 				32CA4F630368D1EE00C91783 /* CoreAnimationBindings_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				3D2342190DC084890041E727 /* gradient2.png */,
@@ -130,6 +131,7 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		7B662AF9162098D0003D5EE0 /* Controllers */ = {
