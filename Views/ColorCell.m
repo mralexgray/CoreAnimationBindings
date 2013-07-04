@@ -5,105 +5,77 @@
 #import "ColorCell.h"
 
 
-@implementation SampleObject
-
-+ (instancetype) instanceWithName:(NSS*)name andColor:(NSC*)c	{
-
-	SampleObject *n = self.instance;
-	n.name = name.copy;
-	n.color = c ?: RANDOMCOLOR.deviceRGBColor;
-	return n;
-}
-- (void) setName: 	 (NSS*)name 		{
-
-	if  (name) _name = name.copy;
-	if (_name)	[AZOS addOperation:[NSBLO blockOperationWithBlock:^{	self.description = _name.wikiDescription ?: @"description N/A"; }]];
-}
-- (void) setColor:(NSColor *)color { [self willChangeValueForKey:@"color"];_color = color;  [self didChangeValueForKey:@"color"]; }
-@end
 
 @implementation ColorCell
-@synthesize	observedKeyPath, color, observedObject;
+//@synthesize	observedKeyPath, color, observedObject;
+//static	id		_classObservedObject = nil;
+//static	NSS* 	_classObservedKeyPath = nil;;
 
-// Draw a bezier roundrect filled with current color
+SYNTHESIZE_SINGLETON_FOR_CLASS(ColorCell, sharedInstance);
 
-- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{
-	NSBezierPath* path = [NSBezierPath bezierPathWithRoundedRect:NSInsetRect(cellFrame, 4, 3) xRadius:4 yRadius:4];
-	[path drawWithFill:color andStroke:BLACK];
-}
+- (void) drawInteriorWithFrame:	 (NSR)cF 	inView:(NSV*)cV	{
 
-// setObjectValue -	save color for use in drawing
-- (void)setObjectValue:(id)object
-{
-	if (object != nil)	
-		color = object;
-	[super setObjectValue:object];
+	// Draw a bezier roundrect filled with current color
+	[[NSBP bezierPathWithRoundedBottomCorners:NSInsetRect(cF, 1, 2) radius:4] drawWithFill:_color andStroke:BLACK];
 }
-
-//	As cells seem to be recycled very aggressively, (used for painting and dismissed) use a shared instance to hold some data we're interested in : observed object and keypath. When clicking the cell, launch color panel and keep our observed data around to know what to update.
-
-+ (id)sharedInstance
-{
-	static id singleton;
-	@synchronized(self)
-	{
-		if (!singleton)
-			singleton = [[ColorCell alloc] init];
-		return singleton;
-	}
-	return singleton;
+- (void) setObjectValue:			 (id)obj								{
+	// setObjectValue -	save color for use in drawing
+	if (obj != nil) _color = obj;
+	[super setObjectValue:obj];
 }
-static	id			_observedObject;
-static	NSString*	_observedKeyPath;
-+ (void)setCurrentObservedObject:(id)observedObject keyPath:(NSString*)observedKeyPath
-{
-	_observedObject		= observedObject;
-	_observedKeyPath	= [NSString stringWithString:observedKeyPath];
-}
-+ (id)observedObject
-{
-	return	_observedObject;
-}
-+ (id)observedKeyPath
-{
-	return	_observedKeyPath;
-}
-
+//+ (void) setCurrentObservedObject:(id)obObj keyPath:(NSS*)obKp {
 //
-// When being bound, save what we're being bound to
-//
-- (void)bind:(NSString *)binding toObject:(id)observable withKeyPath:(NSString *)keyPath options:(NSDictionary *)options
-{
-	observedObject = observable;
-	observedKeyPath = keyPath;
-	[super bind:binding toObject:observable withKeyPath:keyPath options:options];
+//	printf("%s\n\n", $(@"%@currentobvserved obj:%@, andkp:%@",[ obObj valueForKeyPath:obKp], obObj, obKp).UTF8String);
+//	_classObservedObject		= obObj;
+//	_classObservedKeyPath	= [NSS stringWithString:obKp];
+//}
+//+   (id) observedObject														{		return	_classObservedObject;		}
+//+   (id) observedKeyPath													{		return	_classObservedKeyPath;		}
+- (void) colorPanelAction:			 (id)i								{
+
+	// colorPanelAction - 	called by NSColorPanel on color change. Dispatch new color to observed object's keypath.
+//[self  //	[self.class.observedObject
+	[[self representedObject] setValue:NSColorPanel.sharedColorPanel.color forKey:@"color"];
+//	 setValue:NSColorPanel.sharedColorPanel.color forKey:@"color"];//ColorCell.observedKeyPath];
 }
-
-
+//- (void) bind:(NSS*)bndg toObject:(id)obsrvbl
+//  withKeyPath:(NSS*)kP 	  options:(NSD*)opt							{
 //
-// When being double clicked, launch color panel
+//	printf("%s\n\n", $(@"bind:%@ toObj: %@ kp:%@ opt:%@",bndg, obsrvbl, kP, opt).UTF8String);
 //
-- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength
-{
-	[ColorCell setCurrentObservedObject:observedObject keyPath:observedKeyPath];
-	
+//	_observedObject = obsrvbl; 	 _observedKeyPath = kP;
+//
+//	[super bind:bndg toObject:obsrvbl withKeyPath:kP options:opt];
+//}
+
+- (void) selectWithFrame:(NSR)aRect         inView:(NSV*)cV
+					   editor:(NSText*)textObj delegate:(id)anObject
+						 start:(NSI)selStart      length:(NSI)selLen	{
+
+	// When being double clicked, launch color panel
+//	[ColorCell setCurrentObservedObject:self keyPath:_observedKeyPath];
 	[NSApp orderFrontColorPanel:self];
-	NSColorPanel* colorPanel = [NSColorPanel sharedColorPanel];
-	[colorPanel setTarget:[ColorCell sharedInstance]];
-	[colorPanel setAction:@selector(colorPanelAction:)];
-
+	NSColorPanel* colorPanel = NSColorPanel.sharedColorPanel;
+	[colorPanel setTarget: self];//ColorCell.sharedInstance];
+	[colorPanel setAction: @selector(colorPanelAction:)];
 	// Init color panel with cell's observed color
-	[colorPanel setColor:[observedObject valueForKeyPath:observedKeyPath]];
+	[colorPanel  setColor:[self valueForKeyPath:@"color"]];//[_observedObject valueForKeyPath:_observedKeyPath]];
 }
 
-//
-// colorPanelAction
-//	called by NSColorPanel on color change. Dispatch new color to observed object's keypath.
-//
-- (void)colorPanelAction:(id)i
-{
-	[[ColorCell observedObject] setValue:[[NSColorPanel sharedColorPanel] color] forKeyPath:[ColorCell observedKeyPath]];
-}
 
 @end
+
+
+/*		+ (id)sharedInstance															{
+
+ //	As cells seem to be recycled very aggressively, (used for painting and dismissed) use a shared instance to hold some data we're interested in : observed object and keypath. When clicking the cell, launch color panel and keep our observed data around to know what to update.
+
+ static id singleton;
+ @synchronized(self)
+ {
+ if (!singleton)
+ singleton = [[ColorCell alloc] init];
+ return singleton;
+ }
+ return singleton;
+ }	*/

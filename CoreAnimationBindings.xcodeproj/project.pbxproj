@@ -3,14 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		3D23421A0DC084890041E727 /* gradient2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2342190DC084890041E727 /* gradient2.png */; };
 		3D8175AB0DBF210E00B68295 /* ApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8175A80DBF210E00B68295 /* ApplicationController.m */; };
 		3D8175AF0DBF211A00B68295 /* CAListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8175AE0DBF211A00B68295 /* CAListView.m */; };
-		3D81766E0DBF313200B68295 /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D81766D0DBF313200B68295 /* ColorCell.m */; };
 		3D817D1A0DBFA1AC00B68295 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D817D190DBFA1AC00B68295 /* QuartzCore.framework */; };
 		7B662AFD16209B71003D5EE0 /* AtoZ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B662AFB16209B41003D5EE0 /* AtoZ.framework */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
@@ -29,14 +28,14 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* CoreAnimationBindings_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreAnimationBindings_Prefix.pch; path = Resources/CoreAnimationBindings_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		3D2342190DC084890041E727 /* gradient2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient2.png; sourceTree = "<group>"; };
-		3D8175A70DBF210E00B68295 /* ApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationController.h; sourceTree = "<group>"; };
-		3D8175A80DBF210E00B68295 /* ApplicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationController.m; sourceTree = "<group>"; };
-		3D8175A90DBF210E00B68295 /* SampleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleObject.h; sourceTree = "<group>"; };
-		3D8175AA0DBF210E00B68295 /* SampleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleObject.m; sourceTree = "<group>"; };
-		3D8175AD0DBF211A00B68295 /* CAListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAListView.h; sourceTree = "<group>"; };
-		3D8175AE0DBF211A00B68295 /* CAListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAListView.m; sourceTree = "<group>"; };
-		3D81766C0DBF313200B68295 /* ColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCell.h; sourceTree = "<group>"; };
-		3D81766D0DBF313200B68295 /* ColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCell.m; sourceTree = "<group>"; };
+		3D8175A70DBF210E00B68295 /* ApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplicationController.h; path = Controllers/ApplicationController.h; sourceTree = "<group>"; };
+		3D8175A80DBF210E00B68295 /* ApplicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplicationController.m; path = Controllers/ApplicationController.m; sourceTree = "<group>"; };
+		3D8175A90DBF210E00B68295 /* SampleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleObject.h; path = ../Models/SampleObject.h; sourceTree = "<group>"; };
+		3D8175AA0DBF210E00B68295 /* SampleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SampleObject.m; path = ../Models/SampleObject.m; sourceTree = "<group>"; };
+		3D8175AD0DBF211A00B68295 /* CAListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAListView.h; path = Views/CAListView.h; sourceTree = "<group>"; };
+		3D8175AE0DBF211A00B68295 /* CAListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CAListView.m; path = Views/CAListView.m; sourceTree = "<group>"; };
+		3D81766C0DBF313200B68295 /* ColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorCell.h; path = ../Views/ColorCell.h; sourceTree = "<group>"; };
+		3D81766D0DBF313200B68295 /* ColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorCell.m; path = ../Views/ColorCell.m; sourceTree = "<group>"; };
 		3D817D190DBFA1AC00B68295 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		7B662AFB16209B41003D5EE0 /* AtoZ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AtoZ.framework; path = /Library/Frameworks/AtoZ.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,13 +59,9 @@
 		080E96DDFE201D6D7F000001 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3D8175AD0DBF211A00B68295 /* CAListView.h */,
-				3D8175AE0DBF211A00B68295 /* CAListView.m */,
-				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
-				3D81766C0DBF313200B68295 /* ColorCell.h */,
-				3D81766D0DBF313200B68295 /* ColorCell.m */,
 			);
-			path = Views;
+			name = Views;
+			path = ../Views;
 			sourceTree = "<group>";
 		};
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
@@ -99,9 +94,11 @@
 		29B97314FDCFA39411CA2CEA /* CoreAnimationBindings */ = {
 			isa = PBXGroup;
 			children = (
-				7B662AF9162098D0003D5EE0 /* Controllers */,
-				080E96DDFE201D6D7F000001 /* Views */,
-				7B662AFA162098E3003D5EE0 /* Models */,
+				3D8175A70DBF210E00B68295 /* ApplicationController.h */,
+				3D8175A80DBF210E00B68295 /* ApplicationController.m */,
+				3D8175AD0DBF211A00B68295 /* CAListView.h */,
+				3D8175AE0DBF211A00B68295 /* CAListView.m */,
+				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 			);
 			name = CoreAnimationBindings;
@@ -110,6 +107,13 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7B662AF9162098D0003D5EE0 /* Controllers */,
+				080E96DDFE201D6D7F000001 /* Views */,
+				7B662AFA162098E3003D5EE0 /* Models */,
+				3D81766C0DBF313200B68295 /* ColorCell.h */,
+				3D81766D0DBF313200B68295 /* ColorCell.m */,
+				3D8175A90DBF210E00B68295 /* SampleObject.h */,
+				3D8175AA0DBF210E00B68295 /* SampleObject.m */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				32CA4F630368D1EE00C91783 /* CoreAnimationBindings_Prefix.pch */,
@@ -136,8 +140,6 @@
 		7B662AF9162098D0003D5EE0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D8175A70DBF210E00B68295 /* ApplicationController.h */,
-				3D8175A80DBF210E00B68295 /* ApplicationController.m */,
 			);
 			path = Controllers;
 			sourceTree = SOURCE_ROOT;
@@ -145,10 +147,9 @@
 		7B662AFA162098E3003D5EE0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3D8175A90DBF210E00B68295 /* SampleObject.h */,
-				3D8175AA0DBF210E00B68295 /* SampleObject.m */,
 			);
-			path = Models;
+			name = Models;
+			path = ../Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,8 +178,11 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "CoreAnimationBindings" */;
-			compatibilityVersion = "Xcode 3.0";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -214,7 +218,6 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				3D8175AB0DBF210E00B68295 /* ApplicationController.m in Sources */,
 				3D8175AF0DBF211A00B68295 /* CAListView.m in Sources */,
-				3D81766E0DBF313200B68295 /* ColorCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +238,7 @@
 				29B97319FDCFA39411CA2CEA /* English */,
 			);
 			name = MainMenu.nib;
-			path = ../Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -245,9 +248,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -258,7 +262,12 @@
 					"-Xclang",
 					"-fobjc-runtime-has-weak",
 				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					AtoZ,
+				);
 				PRODUCT_NAME = CoreAnimationBindings;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
@@ -268,7 +277,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Resources/CoreAnimationBindings_Prefix.pch;
@@ -278,7 +289,12 @@
 					"-Xclang",
 					"-fobjc-runtime-has-weak",
 				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					AtoZ,
+				);
 				PRODUCT_NAME = CoreAnimationBindings;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -286,11 +302,11 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH_64)";
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = "";
 			};
 			name = Debug;
@@ -298,11 +314,11 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH_64)";
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = "";
 			};
 			name = Release;
